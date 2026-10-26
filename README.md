@@ -2,7 +2,7 @@
 
 Turn plain text into a designed carousel. Blank lines separate slides, the first line of each block is the title; pick a template, theme and brand footer and export PNG, ZIP or a LinkedIn PDF. Everything is rendered on a canvas in the browser: nothing is uploaded.
 
-**Live:** https://__SITE_URL__/ (placeholder – replaced after deploy)
+**Live:** https://carouselmaker-tool.vercel.app/ (placeholder – replaced after deploy)
 
 ## Features
 
@@ -46,7 +46,7 @@ npx -y serve carousel-maker -l 5183
 
 ## How to monetize
 
-1. Deploy to Vercel, then replace `__SITE_URL__` in all files with the real domain (`deploy.sh` does this).
+1. Deploy to Vercel, then replace `carouselmaker-tool.vercel.app` in all files with the real domain (`deploy.sh` does this).
 2. Create a Google AdSense account, add the site, paste the `ca-pub-…` id into `ADSENSE_CLIENT` in `config.js`. Ad slots: sidebar, below tool.
 3. Create a GA4 property and set `GA_ID` to track `download`, `export_zip`, `export_pdf`, `template`, `pro_click`, `begin_checkout`.
 4. Create a Lemon Squeezy product "Carousel Maker Pro" (one-time, license keys enabled). Set `PRO_CHECKOUT_URL` and the `LICENSE.store_id` / `product_id` so keys validate for real.
