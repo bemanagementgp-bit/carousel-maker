@@ -246,6 +246,7 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 
 
 
+
 /* ===== Carousel Maker ===== */
 .stage-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .stage-top .seg{width:auto;flex:1;min-width:260px}
