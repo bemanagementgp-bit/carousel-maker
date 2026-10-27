@@ -55,18 +55,47 @@
   function slidesToText(slides) { return slides.map(s => s.title + (s.body ? '\n' + s.body : '')).join('\n\n'); }
   function newSlide(p) { return Object.assign({ id: Math.random().toString(36).slice(2, 9), title: '', body: '', image: null, fit: 'cover', pos: 'top', overlay: 55 }, p || {}); }
 
+  // ---------- sanitizers: everything restored from localStorage (state, kits) is untrusted ----------
+  // (function declarations: loadState() runs before later consts are initialised)
+  function own(o, k) { return o != null && Object.prototype.hasOwnProperty.call(o, k); }
+  function isHex(v) { return typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v); }
+  function safeImg(v) { return (typeof v === 'string' && /^data:image\/[a-z0-9.+-]+;base64,[a-z0-9+/=]+$/i.test(v)) ? v : null; }
+  function numIn(v, lo, hi, d) { const n = Number(v); return isFinite(n) ? Math.min(hi, Math.max(lo, n)) : d; }
+  function str(v, d, max) { return (typeof v === 'string' ? v : d).slice(0, max || 2000); }
+  function cleanTheme(t, base) {
+    const d = Object.assign({}, base || DEFAULTS.theme); t = t && typeof t === 'object' ? t : {};
+    ['bg', 'bg2', 'text', 'accent'].forEach(k => { if (isHex(t[k])) d[k] = t[k]; });
+    ['gradient', 'badge', 'arrow', 'dots'].forEach(k => { if (own(t, k)) d[k] = !!t[k]; });
+    if (t.font === 'auto' || own(FONTS, t.font)) d.font = t.font;
+    if (own(t, 'scale')) d.scale = numIn(t.scale, 70, 140, d.scale);
+    if (own(t, 'padding')) d.padding = numIn(t.padding, 40, 140, d.padding);
+    return d;
+  }
+  function cleanBrand(b, base) {
+    const d = Object.assign({}, base || DEFAULTS.brand); b = b && typeof b === 'object' ? b : {};
+    if (own(b, 'on')) d.on = !!b.on;
+    if (own(b, 'name')) d.name = str(b.name, '', 80);
+    if (own(b, 'handle')) d.handle = str(b.handle, '', 80);
+    if (own(b, 'avatar')) d.avatar = safeImg(b.avatar);
+    return d;
+  }
+  function cleanSlide(s) {
+    s = s && typeof s === 'object' ? s : {};
+    return newSlide({ title: str(s.title, '', 500), body: str(s.body, '', 4000), image: safeImg(s.image), fit: ['cover', 'contain'].includes(s.fit) ? s.fit : 'cover', pos: ['top', 'bottom', 'background'].includes(s.pos) ? s.pos : 'top', overlay: numIn(s.overlay, 0, 90, 55) });
+  }
   function loadState() {
-    let saved = {};
-    try { saved = JSON.parse(localStorage.getItem(STATE_KEY) || '{}') || {}; } catch (e) { saved = {}; }
+    let saved = S.safeParse(localStorage.getItem(STATE_KEY) || '{}', {});
+    if (!saved || typeof saved !== 'object' || Array.isArray(saved)) saved = {};
+    const cta = saved.cta && typeof saved.cta === 'object' ? saved.cta : {};
     const st = {
-      format: saved.format in FORMATS ? saved.format : DEFAULTS.format,
-      template: saved.template || DEFAULTS.template,
-      current: saved.current || 0,
-      theme: Object.assign({}, DEFAULTS.theme, saved.theme || {}),
-      brand: Object.assign({}, DEFAULTS.brand, saved.brand || {}),
-      cta: Object.assign({}, DEFAULTS.cta, saved.cta || {}),
+      format: own(FORMATS, saved.format) ? saved.format : DEFAULTS.format,
+      template: typeof saved.template === 'string' ? saved.template.slice(0, 40) : DEFAULTS.template, // checked against TEMPLATE_ORDER below
+      current: Math.max(0, Math.floor(numIn(saved.current, 0, MAX_SLIDES, 0))),
+      theme: cleanTheme(saved.theme),
+      brand: cleanBrand(saved.brand),
+      cta: { on: own(cta, 'on') ? !!cta.on : DEFAULTS.cta.on, text: str(cta.text, DEFAULTS.cta.text, 300), sub: str(cta.sub, DEFAULTS.cta.sub, 1000) },
       scale2x: !!saved.scale2x,
-      slides: Array.isArray(saved.slides) && saved.slides.length ? saved.slides.map(s => newSlide(s)) : parseText(DEFAULT_TEXT).map(newSlide)
+      slides: Array.isArray(saved.slides) && saved.slides.length ? saved.slides.slice(0, MAX_SLIDES).map(cleanSlide) : parseText(DEFAULT_TEXT).map(newSlide)
     };
     return st;
   }
@@ -331,6 +360,7 @@
     }
   };
   const TEMPLATE_ORDER = ['bold', 'minimal', 'notebook', 'gradient', 'darktech', 'quote', 'magazine', 'neon', 'papercut', 'swiss'];
+  if (!TEMPLATE_ORDER.includes(state.template)) state.template = DEFAULTS.template; // restored value must be a known template
 
   // ---------- chrome (counter, arrow, dots, brand, CTA) ----------
   function drawChrome(ctx, slide, env) {
@@ -544,7 +574,10 @@
   S.dropzone($('avatarDrop'), async files => { try { state.brand.avatar = await fileToDataURL(files[0], 256, 0.9); syncBrandPanel(); update({ panel: false }); } catch (e) { toast('Could not read that image'); } }, { accept: 'image/*', paste: false });
 
   // brand kits
-  function loadKits() { try { return JSON.parse(localStorage.getItem(KITS_KEY) || '[]') || []; } catch (e) { return []; } }
+  function loadKits() {
+    const v = S.safeParse(localStorage.getItem(KITS_KEY) || '[]', []);
+    return Array.isArray(v) ? v.filter(k => k && typeof k === 'object').slice(0, 200).map(k => ({ name: str(k.name, 'Kit', 120), brand: cleanBrand(k.brand), theme: cleanTheme(k.theme), template: own(TEMPLATES, k.template) ? k.template : null })) : [];
+  }
   function saveKits(k) { try { localStorage.setItem(KITS_KEY, JSON.stringify(k)); } catch (e) { toast('Could not save (storage full)'); } }
   function renderKits() {
     const sel = $('kitSel'), kits = loadKits(); const cur = sel.value; sel.innerHTML = '<option value="">Saved kits…</option>' + kits.map((k, i) => '<option value="' + i + '">' + escapeHtml(k.name) + '</option>').join('');
@@ -558,7 +591,7 @@
   });
   $('kitSel').addEventListener('change', e => {
     const k = loadKits()[+e.target.value]; if (!k) return;
-    Object.assign(state.brand, k.brand); Object.assign(state.theme, k.theme); if (k.template && TEMPLATES[k.template] && (!TEMPLATES[k.template].pro || isPro())) state.template = k.template;
+    state.brand = cleanBrand(k.brand, state.brand); state.theme = cleanTheme(k.theme, state.theme); if (k.template && own(TEMPLATES, k.template) && (!TEMPLATES[k.template].pro || isPro())) state.template = k.template;
     syncBrandPanel(); syncThemePanel(); markTile(); update({ panel: false }); toast('Kit applied');
   });
   $('kitDel').addEventListener('click', () => { const sel = $('kitSel'); if (sel.value === '') return; const kits = loadKits(); kits.splice(+sel.value, 1); saveKits(kits); sel.value = ''; renderKits(); toast('Kit deleted'); });

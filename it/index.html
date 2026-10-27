@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#050403">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Carousel Maker">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generatore di caroselli Instagram – Crea post carosello dal testo (gratis) | Carousel Maker</title>
+  <meta name="description" content="Generatore gratuito di caroselli per Instagram e LinkedIn. Incolla il tuo testo, scegli modello e colori, aggiungi immagini e scarica ogni slide in PNG o come PDF per LinkedIn.">
+  <link rel="canonical" href="https://carouselmaker-tool.vercel.app/it/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://carouselmaker-tool.vercel.app/it/">
+  <meta property="og:title" content="Generatore di caroselli Instagram – Crea post carosello dal testo (gratis) | Carousel Maker">
+  <meta property="og:description" content="Trasforma un semplice testo in un carosello impaginato per Instagram o LinkedIn. Modelli, piè di pagina del brand, contatore delle slide ed esportazione PNG/ZIP/PDF. Funziona nel tuo browser.">
+  <meta property="og:image" content="https://carouselmaker-tool.vercel.app/favicon.svg">
+  <meta property="og:site_name" content="Carousel Maker">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Generatore di caroselli Instagram – Crea post carosello dal testo (gratis)">
+  <meta name="twitter:description" content="Trasforma un semplice testo in un carosello impaginato per Instagram o LinkedIn. Modelli, piè di pagina del brand ed esportazione PNG/ZIP/PDF.">
+  <meta name="twitter:image" content="https://carouselmaker-tool.vercel.app/favicon.svg">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Carousel Maker – Generatore di caroselli per Instagram e LinkedIn","url":"https://carouselmaker-tool.vercel.app/","applicationCategory":"DesignApplication","operatingSystem":"Any (web browser)","browserRequirements":"Requires JavaScript","description":"Generatore di caroselli online gratuito. Scrivi le slide come semplice testo, scegli modello, tema e piè di pagina del brand ed esporta le slide del carosello per Instagram o LinkedIn in PNG, ZIP o PDF. Tutto viene generato nel tuo browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Trasforma il testo in slide di carosello (riga vuota = nuova slide)","Formati Instagram 4:5, 1:1, Storia 9:16 e LinkedIn","Sei modelli gratuiti con anteprima in tempo reale","Piè di pagina del brand con nome, nome utente e avatar","Contatore delle slide, freccia di scorrimento e puntini di avanzamento","Scarica PNG, ZIP di tutte le slide o PDF per LinkedIn"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Questo generatore di caroselli è gratis?","acceptedAnswer":{"@type":"Answer","text":"Sì. Puoi scrivere slide illimitate, usare i sei modelli gratuiti, personalizzare colori, font e piè di pagina del brand e scaricare le slide in PNG gratis con un piccolo badge come filigrana. Carousel Maker Pro è un upgrade opzionale una tantum che rimuove la filigrana, consente fino a 20 slide per esportazione ZIP o PDF, aggiunge l'esportazione 2x, l'esportazione PDF per LinkedIn, quattro modelli premium e kit del brand salvati illimitati."}},{"@type":"Question","name":"Che dimensioni deve avere un carosello Instagram?","acceptedAnswer":{"@type":"Answer","text":"Usa 1080 × 1350 pixel (4:5 verticale) per i caroselli del feed: occupa più spazio sullo schermo e Instagram lo mantiene nitido. Anche il quadrato 1080 × 1080 (1:1) funziona, e 1080 × 1920 (9:16) è per le Storie. Tutte le slide di un carosello devono avere lo stesso rapporto, cosa che questo strumento garantisce."}},{"@type":"Question","name":"Come pubblico un carosello su LinkedIn?","acceptedAnswer":{"@type":"Answer","text":"I caroselli di LinkedIn sono documenti PDF. Seleziona il formato LinkedIn, progetta le slide ed esporta un PDF multipagina (una slide per pagina). Su LinkedIn, inizia un post, scegli Aggiungi un documento, carica il PDF e dagli un titolo. LinkedIn mostra ogni pagina come una slide da scorrere."}},{"@type":"Question","name":"Posso aggiungere le mie immagini alle slide?","acceptedAnswer":{"@type":"Answer","text":"Sì. Seleziona una slide, carica un JPG, PNG o WebP e scegli se posizionarlo in alto, in basso o dietro il testo come sfondo a tutta pagina con una sovrapposizione colorata. Per ogni immagine puoi anche scegliere riempi o adatta. Le immagini restano sul tuo dispositivo."}},{"@type":"Question","name":"Le mie slide vengono caricate da qualche parte?","acceptedAnswer":{"@type":"Answer","text":"No. Ogni slide viene disegnata con la Canvas API di HTML nel tuo browser. Testo, immagini e impostazioni del brand sono salvati nel localStorage del browser così li ritrovi quando torni, e nulla viene inviato a un server."}},{"@type":"Question","name":"Quante slide dovrebbe avere un carosello?","acceptedAnswer":{"@type":"Answer","text":"Instagram consente fino a 20 slide e i documenti di LinkedIn possono essere molto più lunghi, ma i dati di engagement favoriscono costantemente 6–10 slide: un gancio forte, un'idea per slide e una chiara call to action alla fine. Le esportazioni gratuite includono fino a 5 slide; Pro alza il limite a 20."}}]}</script>
+  <script src="/config.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/consent.js"></script>
+  <script src="/monetize.js"></script>
+  <script src="/studio.js"></script>
+  <!-- hreflang:start -->
+  <meta name="bm-langs" content="en,es,pt,fr,de,it">
+  <link rel="alternate" hreflang="en" href="https://carouselmaker-tool.vercel.app/">
+  <link rel="alternate" hreflang="es" href="https://carouselmaker-tool.vercel.app/es/">
+  <link rel="alternate" hreflang="pt" href="https://carouselmaker-tool.vercel.app/pt/">
+  <link rel="alternate" hreflang="fr" href="https://carouselmaker-tool.vercel.app/fr/">
+  <link rel="alternate" hreflang="de" href="https://carouselmaker-tool.vercel.app/de/">
+  <link rel="alternate" hreflang="it" href="https://carouselmaker-tool.vercel.app/it/">
+  <link rel="alternate" hreflang="x-default" href="https://carouselmaker-tool.vercel.app/">
+  <!-- hreflang:end -->
+  <meta property="og:locale" content="it_IT">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+    <a class="brand" href="/it/" aria-label="Home di Carousel Maker">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><span class="brand-name">Carousel Maker</span><span class="brand-desc">Caroselli per Instagram e LinkedIn</span></span>
+    </a>
+    <nav class="nav" aria-label="Principale">
+      <details class="more-tools">
+        <summary class="btn btn-ghost btn-sm" aria-label="Altri strumenti"><span class="mt-label">Altri strumenti</span> ▾</summary>
+        <div class="menu">
+          <a href="https://quickinvoice-tool.vercel.app"><span class="mi">Q</span>QuickInvoice<small>Fatture</small></a>
+          <a href="https://ratecalc-tool.vercel.app"><span class="mi">R</span>RateCalc<small>Tariffe freelance</small></a>
+          <a href="https://qrforge-tool.vercel.app"><span class="mi">Q</span>QRForge<small>Codici QR</small></a>
+          <a href="https://squish-tool.vercel.app"><span class="mi">S</span>Squish<small>Compressore di immagini</small></a>
+          <a href="https://growthcalc-tool.vercel.app"><span class="mi">G</span>GrowthCalc<small>Interesse composto</small></a>
+          <a href="https://subnetkit-tool.vercel.app"><span class="mi">N</span>SubnetKit<small>Subnet IP</small></a>
+          <a href="https://shotstudio-tool.vercel.app"><span class="mi">S</span>Screenshot Studio<small>Mockup di screenshot</small></a>
+          <a href="https://mockuplab-tool.vercel.app"><span class="mi">M</span>Social Mockup Lab<small>Mockup di chat e post</small></a>
+          <a href="https://carouselmaker-tool.vercel.app" class="current"><span class="mi">C</span>Carousel Maker<small>Slide per caroselli</small></a>
+          <a href="https://creativeresize-tool.vercel.app"><span class="mi">R</span>Creative Resize<small>Formati social</small></a>
+          <a href="https://framelab-tool.vercel.app"><span class="mi">F</span>Frame Lab<small>Cornici e mockup per foto</small></a>
+          <a href="https://giveaway-tool.vercel.app"><span class="mi">G</span>Giveaway Picker<small>Giveaway su Instagram</small></a>
+          <a href="https://iplookup-tool.vercel.app"><span class="mi">I</span>IP Lookup<small>Ricerca IP</small></a>
+          <a href="https://sizeconverter-tool.vercel.app"><span class="mi">Z</span>Size Converter<small>Ridimensiona immagini e video</small></a>
+        </div>
+      </details>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="brand-by">di <b>Be Management</b></span>
+      <button class="btn btn-sm hidden" id="installBtn" data-action="install" title="Installa questo strumento come app">⤓ Installa</button>
+      <span class="lang-switch"><select id="langSelect" aria-label="Language" translate="no"><option value="en">EN</option></select></span>
+      <button class="btn btn-primary btn-sm" data-action="pro" data-arg="nav">Pro</button><button class="btn icon-btn btn-sm" data-action="theme" aria-label="Cambia tema">◐</button>
+    </nav>
+    </div>
+  </div>
+</header>
+
+<section class="hero container">
+  <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Be Management Tools · Creatività · Caroselli</span>
+  <h1>Generatore di caroselli Instagram</h1>
+  <p class="tagline">Scrivi le slide, scegli modello e colori, aggiungi immagini e scarica un carosello pronto da pubblicare su Instagram o LinkedIn.</p>
+  <div class="badges">
+  <span class="badge">100% gratis</span>
+  <span class="badge">Nessuna registrazione</span>
+  <span class="badge">Funziona nel tuo browser</span>
+  <span class="badge">Dimensioni per Instagram e LinkedIn</span>
+  <span class="badge">PNG · ZIP · PDF</span>
+  </div>
+</section>
+
+<main class="container">
+  <div class="studio">
+    <div class="studio-stage">
+      <div class="stage-top">
+        <div class="seg fmt-seg" id="fmtSeg" role="group" aria-label="Formato">
+          <button type="button" data-value="4:5" class="active">4:5 Instagram</button>
+          <button type="button" data-value="1:1">1:1 Quadrato</button>
+          <button type="button" data-value="9:16">9:16 Storia</button>
+          <button type="button" data-value="linkedin">PDF LinkedIn</button>
+        </div>
+        <span class="size-label" id="sizeLabel">1080 × 1350</span>
+      </div>
+      <div class="studio-canvas" id="stage"><canvas id="preview" width="1080" height="1350" aria-label="Anteprima della slide corrente"></canvas></div>
+
+      <div class="strip-wrap">
+        <div class="strip" id="strip" role="listbox" aria-label="Slide"></div>
+        <div class="strip-tools">
+          <button type="button" class="btn btn-sm" id="addSlideBtn" title="Aggiungi slide">+ Aggiungi</button>
+          <button type="button" class="btn btn-sm" id="dupSlideBtn" title="Duplica slide">Duplica</button>
+          <button type="button" class="btn btn-sm btn-danger" id="delSlideBtn" title="Elimina slide">Elimina</button>
+          <span class="sep" aria-hidden="true"></span>
+          <button type="button" class="btn btn-sm icon-btn" id="moveLeftBtn" title="Sposta la slide a sinistra" aria-label="Sposta la slide a sinistra">◀</button>
+          <button type="button" class="btn btn-sm icon-btn" id="moveRightBtn" title="Sposta la slide a destra" aria-label="Sposta la slide a destra">▶</button>
+          <span class="hint strip-hint" id="slideCount">7 slide</span>
+        </div>
+      </div>
+
+      <div class="studio-actions">
+        <button type="button" class="btn btn-primary" id="dlBtn">Scarica PNG</button>
+        <button type="button" class="btn" id="copyBtn">Copia</button>
+        <button type="button" class="chip" id="scaleChip" title="Esporta a risoluzione 2x" aria-pressed="false">2x <span class="pro-badge" data-pro-only>PRO</span></button>
+        <button type="button" class="btn" id="zipBtn">Scarica tutto (ZIP)</button>
+        <button type="button" class="btn" id="pdfBtn">PDF LinkedIn <span class="pro-badge" data-pro-only>PRO</span></button>
+      </div>
+      <p class="hint export-hint" id="exportHint">Gratis: PNG con una piccola filigrana · ZIP fino a 5 slide. Pro: nessuna filigrana, 20 slide, 2x, PDF.</p>
+    </div>
+
+    <aside class="studio-panel">
+      <details class="panel" open>
+        <summary>Contenuto</summary>
+        <div class="panel-body">
+          <label for="text">Scrivi il tuo carosello</label>
+          <textarea id="text" rows="12" spellcheck="true" placeholder="Hook title&#10;Optional body text&#10;&#10;Second slide title&#10;Body…"></textarea>
+          <p class="hint">Una riga vuota inizia una nuova slide. La prima riga di ogni blocco è il titolo, il resto è il corpo. La prima slide riceve lo stile grande da gancio.</p>
+          <div class="row" style="margin-top:8px">
+            <button type="button" class="btn btn-sm" id="exampleBtn">Carica un esempio</button>
+            <button type="button" class="btn btn-sm btn-ghost" id="clearBtn">Cancella</button>
+          </div>
+          <div class="switch-row">
+            <span>Slide CTA alla fine<small>"Seguimi per altri contenuti" con il tuo nome utente</small></span>
+            <label class="switch"><input type="checkbox" id="ctaOn" checked><i></i></label>
+          </div>
+          <div id="ctaFields">
+            <div class="field"><label for="ctaText">Titolo della CTA</label><input id="ctaText" value="Follow for more"></div>
+            <div class="field"><label for="ctaSub">Testo della CTA</label><input id="ctaSub" placeholder="Salva questo post per dopo"></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="panel" open>
+        <summary>Slide <span id="slideIdx" class="summary-tag">1 / 7</span></summary>
+        <div class="panel-body">
+          <div class="field"><label for="slideTitle">Titolo</label><input id="slideTitle" placeholder="Titolo della slide"></div>
+          <div class="field"><label for="slideBody">Corpo</label><textarea id="slideBody" rows="4" placeholder="Slide body"></textarea></div>
+          <div id="slideImgBlock">
+            <label>Immagine (facoltativa)</label>
+            <div class="img-drop" id="slideImgDrop" tabindex="0" role="button" aria-label="Carica un'immagine per questa slide">
+              <img id="slideImgPreview" alt="" hidden>
+              <span id="slideImgText">Fai clic o trascina un'immagine</span>
+            </div>
+            <div id="slideImgOpts" class="hidden">
+              <div class="opt-row"><span class="opt-label">Adatta</span>
+                <div class="seg" id="fitSeg"><button type="button" data-value="cover" class="active">Riempi</button><button type="button" data-value="contain">Adatta</button></div>
+              </div>
+              <div class="opt-row"><span class="opt-label">Posizione</span>
+                <div class="seg" id="posSeg"><button type="button" data-value="top" class="active">In alto</button><button type="button" data-value="bottom">In basso</button><button type="button" data-value="background">Sfondo</button></div>
+              </div>
+              <div class="ctl" id="overlayRow"><span>Sovrapposizione</span><input type="range" id="overlayRange" min="0" max="90" value="55" aria-label="Intensità della sovrapposizione sullo sfondo"><span class="v" id="overlayVal">55%</span></div>
+              <button type="button" class="btn btn-sm btn-ghost btn-danger" id="slideImgRemove">Rimuovi immagine</button>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="panel" open>
+        <summary>Modello</summary>
+        <div class="panel-body">
+          <div class="tiles" id="tiles"></div>
+          <p class="hint">Scegliere un modello applica anche i colori suggeriti. Modificali in Tema.</p>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>Tema</summary>
+        <div class="panel-body">
+          <div class="color-grid">
+            <div class="field"><label for="bgColor">Sfondo</label><div class="row"><input type="color" id="bgColor" value="#0f0f10"><span class="hint" id="bgHex">#0f0f10</span></div></div>
+            <div class="field"><label for="textColor">Testo</label><div class="row"><input type="color" id="textColor" value="#fafafa"><span class="hint" id="textHex">#fafafa</span></div></div>
+            <div class="field"><label for="accentColor">Accento</label><div class="row"><input type="color" id="accentColor" value="#f97316"><span class="hint" id="accentHex">#f97316</span></div></div>
+            <div class="field" id="bg2Row"><label for="bg2Color">Fine del gradiente</label><div class="row"><input type="color" id="bg2Color" value="#3b1d0a"><span class="hint" id="bg2Hex">#3b1d0a</span></div></div>
+          </div>
+          <div class="switch-row"><span>Sfondo sfumato</span><label class="switch"><input type="checkbox" id="gradOn"><i></i></label></div>
+          <div class="field"><label for="fontSel">Font</label>
+            <select id="fontSel">
+              <option value="auto">Predefinito del modello</option>
+              <option value="system">Sans di sistema (Inter / SF / Segoe)</option>
+              <option value="georgia">Georgia (serif)</option>
+              <option value="trebuchet">Trebuchet MS</option>
+              <option value="courier">Courier New (mono)</option>
+              <option value="impact">Sans pesante (tipo Impact)</option>
+              <option value="palatino">Palatino (serif)</option>
+            </select>
+          </div>
+          <div class="ctl"><span>Dimensione del testo</span><input type="range" id="scaleRange" min="70" max="140" value="100" aria-label="Scala della dimensione del testo"><span class="v" id="scaleVal">100%</span></div>
+          <div class="ctl"><span>Spaziatura</span><input type="range" id="padRange" min="40" max="140" value="80" aria-label="Spaziatura"><span class="v" id="padVal">80</span></div>
+          <div class="switch-row"><span>Contatore nell'angolo<small>"1/7" nell'angolo in alto</small></span><label class="switch"><input type="checkbox" id="badgeOn" checked><i></i></label></div>
+          <div class="switch-row"><span>Freccia di scorrimento<small>"→" su tutte le slide tranne l'ultima</small></span><label class="switch"><input type="checkbox" id="arrowOn" checked><i></i></label></div>
+          <div class="switch-row"><span>Puntini di avanzamento</span><label class="switch"><input type="checkbox" id="dotsOn" checked><i></i></label></div>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>Brand</summary>
+        <div class="panel-body">
+          <div class="switch-row"><span>Mostra il piè di pagina del brand<small>Nome, nome utente e avatar su ogni slide</small></span><label class="switch"><input type="checkbox" id="brandOn" checked><i></i></label></div>
+          <div class="grid-2 brand-grid">
+            <div class="field"><label for="brandName">Nome</label><input id="brandName" placeholder="Il tuo nome"></div>
+            <div class="field"><label for="brandHandle">Nome utente</label><input id="brandHandle" placeholder="@nomeutente"></div>
+          </div>
+          <label>Avatar</label>
+          <div class="row avatar-row">
+            <div class="avatar-drop" id="avatarDrop" tabindex="0" role="button" aria-label="Carica avatar"><img id="avatarPreview" alt="" hidden><span id="avatarInitial">A</span></div>
+            <button type="button" class="btn btn-sm btn-ghost" id="avatarRemove">Rimuovi</button>
+          </div>
+          <p class="section-label" style="margin-top:14px">Kit del brand</p>
+          <div class="row kit-row">
+            <select id="kitSel" aria-label="Kit del brand salvati"><option value="">Kit salvati…</option></select>
+            <button type="button" class="btn btn-sm" id="kitSave">Salva</button>
+            <button type="button" class="btn btn-sm btn-ghost btn-danger" id="kitDel">Elimina</button>
+          </div>
+          <p class="hint" id="kitHint">Gratis: 1 kit salvato. Pro: illimitati.</p>
+        </div>
+      </details>
+
+      <div class="ad-slot" data-slot="sidebar-1"></div>
+
+      <div class="card pro-card">
+        <h3>Passa a Pro <span class="pro-badge">A VITA</span></h3>
+        <ul>
+          <li>Nessuna filigrana su nessuna esportazione</li>
+          <li>Fino a 20 slide per ZIP / PDF</li>
+          <li>Esportazione 2x + PDF LinkedIn</li>
+          <li>4 modelli premium + kit del brand illimitati</li>
+        </ul>
+        <button class="btn btn-primary btn-block" data-action="pro" data-arg="sidebar">Passa a Pro – <span data-pro-price></span> una tantum</button>
+      </div>
+      <div class="card lead-card" id="leadCard" hidden>
+        <h3>Idee di caroselli che vengono salvati</h3>
+        <p class="hint">Ganci, layout e nuovi modelli per caroselli, una o due volte al mese. Niente spam.</p>
+        <form class="lead-form" data-action="newsletter">
+          <input type="email" name="email" required placeholder="tu@email.com" aria-label="Indirizzo email" autocomplete="email">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+          <button class="btn btn-primary" type="submit">Abbonati</button>
+        </form>
+        <p class="hint tiny">Niente spam. Annulli l'iscrizione quando vuoi.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="container"><div class="ad-slot horizontal" data-slot="below-tool"></div></div>
+
+<section class="content container">
+  <div class="features">
+    <div class="feature"><div class="ic">✍️</div><h3>Entra il testo, escono le slide</h3><p>Scrivi il carosello come una nota. Ogni riga vuota diventa una nuova slide con titolo e corpo.</p></div>
+    <div class="feature"><div class="ic">🎨</div><h3>Modelli coordinati</h3><p>Bold, Minimal, Notebook, Gradient Pop, Dark Tech e Quote mantengono coerenti tutte le slide.</p></div>
+    <div class="feature"><div class="ic">👤</div><h3>Il tuo brand su ogni slide</h3><p>Nome, @nomeutente e avatar in una barra a piè di pagina, più contatore delle slide, freccia di scorrimento e puntini di avanzamento.</p></div>
+    <div class="feature"><div class="ic">📦</div><h3>PNG, ZIP o PDF</h3><p>Scarica una slide, tutte le slide in uno ZIP o un PDF multipagina pronto per i documenti di LinkedIn.</p></div>
+  </div>
+
+  <h2>Come creare un carosello Instagram dal testo</h2>
+  <p>I caroselli sono il formato più salvato su Instagram e il formato organico con le migliori prestazioni su LinkedIn, ma progettare da sei a dieci slide coordinate in un programma di grafica richiede un'ora. Carousel Maker riduce il tutto a pochi minuti: tu scrivi, lui impagina. Scrivi o incolla il tuo testo nel riquadro <strong>Contenuto</strong> e separa le slide con una riga vuota. La prima riga di ogni blocco diventa il titolo della slide e le righe restanti il corpo. Scegli un modello, regola colori e font, aggiungi nome e nome utente e scarica.</p>
+  <ol>
+    <li><strong>Scrivi le slide.</strong> Inizia con un gancio, poi un'idea per slide. L'ultima slide viene generata automaticamente come call to action.</li>
+    <li><strong>Scegli un formato.</strong> 4:5 per il feed di Instagram, 1:1 per il quadrato, 9:16 per le Storie, oppure LinkedIn per un documento PDF.</li>
+    <li><strong>Scegli un modello e un tema.</strong> Ogni modello applica una palette suggerita che puoi modificare: colori di sfondo, gradiente, testo e accento, sei famiglie di font, dimensione del testo e margini.</li>
+    <li><strong>Aggiungi immagini (facoltativo).</strong> Seleziona una slide e carica una foto. Posizionala in alto, in basso o dietro il testo con una sovrapposizione.</li>
+    <li><strong>Esporta.</strong> Scarica la slide corrente in PNG, tutte le slide in uno ZIP o un PDF per LinkedIn. Nulla lascia il tuo browser.</li>
+  </ol>
+
+  <h2>Cosa fa salvare un carosello</h2>
+  <h3>Il gancio decide tutto</h3>
+  <p>La maggior parte delle persone decide in un secondo se scorrere. La prima slide ha bisogno di una promessa o di una tensione, non di un titolo: "5 errori dei nuovi freelance" funziona perché lascia intendere un elenco con cui il lettore può confrontarsi. Carousel Maker mostra la prima slide in uno stile da gancio più grande, così la promessa si legge anche in una piccola miniatura del feed.</p>
+  <h3>Un'idea per slide</h3>
+  <p>Le slide non sono pagine. Su ognuna tieni un solo concetto, un titolo breve e al massimo tre righe di testo. Se un concetto richiede di più, dividilo in due slide. Il contatore integrato ("3/7") e la freccia di scorrimento dicono ai lettori quanto manca e li spingono a proseguire, aumentando la quota di persone che arrivano alla fine e vedono la tua call to action.</p>
+  <h3>Chiudi con una CTA</h3>
+  <p>Salvataggi e condivisioni avvengono sull'ultima slide. Chiedi esattamente un'azione: segui, salva o condividi con una persona precisa ("invialo a un amico freelance"). La slide CTA è modificabile e ripete il tuo nome utente, così il tuo profilo resta visibile anche quando il carosello viene ricondiviso come screenshot.</p>
+
+  <h2>Dimensioni dei caroselli: Instagram e LinkedIn a confronto</h2>
+  <p><strong>Instagram</strong> accetta fino a 20 slide per carosello. Usa <strong>1080 × 1350 px (4:5)</strong> per il feed: riempie lo schermo più di un quadrato e Instagram lo mantiene nitido. Il quadrato 1080 × 1080 funziona ancora ovunque, e 1080 × 1920 (9:16) è per le Storie. Tutte le slide devono avere lo stesso rapporto d'aspetto, altrimenti Instagram le ritaglia in base alla prima slide.</p>
+  <p><strong>LinkedIn</strong> non ha caroselli di immagini; si carica invece un <strong>documento PDF</strong>, e LinkedIn trasforma ogni pagina in una slide da scorrere. Le pagine verticali 4:5 (1080 × 1350) si leggono meglio su mobile, dove si passa la maggior parte del tempo nel feed di LinkedIn. Tieni il file sotto i 100 MB e sotto le 300 pagine, scrivi del vero testo nelle prime righe del post (il testo del PDF non viene indicizzato) e dai al documento un titolo descrittivo.</p>
+
+  <h2>Come pubblicare un carosello PDF su LinkedIn</h2>
+  <ol>
+    <li>Scegli il formato <strong>PDF LinkedIn</strong> e progetta le slide (6–10 pagine funzionano al meglio).</li>
+    <li>Fai clic su <strong>PDF LinkedIn</strong> per esportare un documento multipagina (Pro): ogni slide diventa una pagina.</li>
+    <li>Su LinkedIn, fai clic su <strong>Inizia un post → Aggiungi un documento</strong>, carica il PDF e aggiungi un titolo.</li>
+    <li>Scrivi il testo del post con il gancio nelle prime due righe, poi pubblica.</li>
+  </ol>
+
+  <h2>Domande frequenti</h2>
+  <div class="faq">
+    <details><summary>Questo generatore di caroselli è gratis?</summary><p>Sì. Puoi scrivere slide illimitate, usare i sei modelli gratuiti, personalizzare colori, font e piè di pagina del brand e scaricare le slide in PNG gratis con un piccolo badge come filigrana. Carousel Maker Pro è un upgrade opzionale una tantum che rimuove la filigrana, consente fino a 20 slide per esportazione ZIP o PDF, aggiunge l'esportazione 2x, l'esportazione PDF per LinkedIn, quattro modelli premium e kit del brand salvati illimitati.</p></details>
+    <details><summary>Che dimensioni deve avere un carosello Instagram?</summary><p>Usa 1080 × 1350 pixel (4:5 verticale) per i caroselli del feed: occupa più spazio sullo schermo e Instagram lo mantiene nitido. Anche il quadrato 1080 × 1080 (1:1) funziona, e 1080 × 1920 (9:16) è per le Storie. Tutte le slide di un carosello devono avere lo stesso rapporto, cosa che questo strumento garantisce.</p></details>
+    <details><summary>Come pubblico un carosello su LinkedIn?</summary><p>I caroselli di LinkedIn sono documenti PDF. Seleziona il formato LinkedIn, progetta le slide ed esporta un PDF multipagina (una slide per pagina). Su LinkedIn, inizia un post, scegli Aggiungi un documento, carica il PDF e dagli un titolo. LinkedIn mostra ogni pagina come una slide da scorrere.</p></details>
+    <details><summary>Posso aggiungere le mie immagini alle slide?</summary><p>Sì. Seleziona una slide, carica un JPG, PNG o WebP e scegli se posizionarlo in alto, in basso o dietro il testo come sfondo a tutta pagina con una sovrapposizione colorata. Per ogni immagine puoi anche scegliere riempi o adatta. Le immagini restano sul tuo dispositivo.</p></details>
+    <details><summary>Le mie slide vengono caricate da qualche parte?</summary><p>No. Ogni slide viene disegnata con la Canvas API di HTML nel tuo browser. Testo, immagini e impostazioni del brand sono salvati nel localStorage del browser così li ritrovi quando torni, e nulla viene inviato a un server.</p></details>
+    <details><summary>Quante slide dovrebbe avere un carosello?</summary><p>Instagram consente fino a 20 slide e i documenti di LinkedIn possono essere molto più lunghi, ma i dati di engagement favoriscono costantemente 6–10 slide: un gancio forte, un'idea per slide e una chiara call to action alla fine. Le esportazioni gratuite includono fino a 5 slide; Pro alza il limite a 20.</p></details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark lg" aria-hidden="true"></span>
+      <div>
+        <strong>Be Management Tools</strong>
+        <p>Una raccolta di strumenti gratuiti e privati che funzionano interamente nel tuo browser. Carousel Maker è il generatore di caroselli per Instagram e LinkedIn della famiglia, creato e gestito da Be Management.</p>
+      </div>
+    </div>
+    <div class="footer-tools">
+      <strong>Altri strumenti gratuiti</strong>
+      <ul>
+        <li><a href="https://quickinvoice-tool.vercel.app">QuickInvoice · Fatture</a></li>
+        <li><a href="https://ratecalc-tool.vercel.app">RateCalc · Tariffe freelance</a></li>
+        <li><a href="https://qrforge-tool.vercel.app">QRForge · Codici QR</a></li>
+        <li><a href="https://squish-tool.vercel.app">Squish · Compressore di immagini</a></li>
+        <li><a href="https://growthcalc-tool.vercel.app">GrowthCalc · Interesse composto</a></li>
+        <li><a href="https://subnetkit-tool.vercel.app">SubnetKit · Subnet IP</a></li>
+        <li><a href="https://shotstudio-tool.vercel.app">Screenshot Studio · Mockup di screenshot</a></li>
+        <li><a href="https://mockuplab-tool.vercel.app">Social Mockup Lab · Mockup di chat e post</a></li>
+        <li><a href="https://carouselmaker-tool.vercel.app" class="current">Carousel Maker · Slide per caroselli</a></li>
+        <li><a href="https://creativeresize-tool.vercel.app">Creative Resize · Formati social</a></li>
+        <li><a href="https://framelab-tool.vercel.app">Frame Lab · Cornici e mockup per foto</a></li>
+        <li><a href="https://giveaway-tool.vercel.app">Giveaway Picker · Giveaway su Instagram</a></li>
+        <li><a href="https://iplookup-tool.vercel.app">IP Lookup · Ricerca IP</a></li>
+        <li><a href="https://sizeconverter-tool.vercel.app">Size Converter · Ridimensiona immagini e video</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">
+      <span>© <span data-year></span> Be Management · Carousel Maker. Generatore di caroselli gratuito. Non viene caricato nulla.</span>
+      <span><a href="/it/privacy" data-i18n-href="/it/privacy">Privacy</a> · <a href="/it/terms" data-i18n-href="/it/terms">Termini</a> · <a href="#" data-action="cookie-settings">Impostazioni cookie</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="proModal" role="dialog" aria-modal="true">
+  <div class="card">
+    <button class="btn btn-sm close" data-action="close-pro">✕</button>
+    <h3>Passa a Carousel Maker Pro <span class="pro-badge">A VITA</span></h3>
+    <div class="price"><span id="proPrice"></span> <small>una tantum</small></div>
+    <ul>
+      <li>Nessuna filigrana</li>
+      <li>Fino a 20 slide</li>
+      <li>Esportazione 2x</li>
+      <li>Esportazione PDF per LinkedIn</li>
+      <li>Modelli premium</li>
+      <li>Kit del brand salvati</li>
+    </ul>
+    <button class="btn btn-primary btn-block" data-action="checkout">Passa a Pro</button>
+    <p class="hint" style="margin-top:12px">Hai già acquistato? <a href="#" data-action="toggle-license">Inserisci la chiave di licenza</a></p>
+    <div class="row hidden" id="licenseRow"><input id="licenseKey" placeholder="Chiave di licenza"><button class="btn" data-action="activate-license">Attiva</button></div>
+  </div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>
