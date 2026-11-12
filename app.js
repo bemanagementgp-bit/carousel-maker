@@ -23,20 +23,29 @@
     palatino: '"Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif'
   };
 
+  // generic placeholder copy per page language (samples show *where things go*, not invented content)
+  const SAMPLES = {
+    en: { title: 'Title', sub: 'Short subtitle', point: 'Point', line: 'A short line of text.', cta: 'Call to action', ctaSub: 'Your text here', name: 'Name', handle: '@username', newSlide: 'New slide', blank: 'Your title here', follow: 'Follow' },
+    es: { title: 'Título', sub: 'Subtítulo corto', point: 'Punto', line: 'Una línea de texto corta.', cta: 'Llamado a la acción', ctaSub: 'Tu texto acá', name: 'Nombre', handle: '@usuario', newSlide: 'Nuevo slide', blank: 'Tu título acá', follow: 'Seguir a' },
+    pt: { title: 'Título', sub: 'Subtítulo curto', point: 'Ponto', line: 'Uma linha de texto curta.', cta: 'Chamada para ação', ctaSub: 'Seu texto aqui', name: 'Nome', handle: '@usuario', newSlide: 'Novo slide', blank: 'Seu título aqui', follow: 'Siga' },
+    fr: { title: 'Titre', sub: 'Sous-titre court', point: 'Point', line: 'Une courte ligne de texte.', cta: 'Appel à l\'action', ctaSub: 'Votre texte ici', name: 'Nom', handle: '@pseudo', newSlide: 'Nouvelle slide', blank: 'Votre titre ici', follow: 'Suivre' },
+    de: { title: 'Titel', sub: 'Kurzer Untertitel', point: 'Punkt', line: 'Eine kurze Textzeile.', cta: 'Call to Action', ctaSub: 'Dein Text hier', name: 'Name', handle: '@nutzername', newSlide: 'Neue Slide', blank: 'Dein Titel hier', follow: 'Folge' },
+    it: { title: 'Titolo', sub: 'Sottotitolo breve', point: 'Punto', line: 'Una breve riga di testo.', cta: 'Invito all\'azione', ctaSub: 'Il tuo testo qui', name: 'Nome', handle: '@nomeutente', newSlide: 'Nuova slide', blank: 'Il tuo titolo qui', follow: 'Segui' }
+  };
+  const L = SAMPLES[(document.documentElement.lang || 'en').slice(0, 2).toLowerCase()] || SAMPLES.en;
+
   const DEFAULT_TEXT = [
-    '5 mistakes new freelancers make\n(and how to fix them before they cost you clients)',
-    '1. Charging by the hour\nHourly rates punish you for being fast. Price the outcome, not the time: start with day rates or fixed project packages.',
-    '2. Saying yes to everyone\nEvery bad-fit client eats the hours you need for a great one. Qualify before you quote: budget, timeline, decision maker.',
-    '3. No contract, no deposit\nA one-page agreement and a 30–50% deposit filter out the clients who were never going to pay.',
-    '4. Skipping the follow-up\nMost proposals die in silence, not in a "no". Follow up three times, 3–4 days apart. Polite persistence wins.',
-    '5. Marketing only when you\'re empty\nPipeline work is a weekly habit, not an emergency. Block two hours every week for outreach and content.'
+    L.title + '\n' + L.sub,
+    L.point + ' 1\n' + L.line,
+    L.point + ' 2\n' + L.line,
+    L.point + ' 3\n' + L.line
   ].join('\n\n');
 
   const DEFAULTS = {
     format: '4:5', template: 'bold', current: 0,
     theme: { bg: '#0f0f10', bg2: '#3b1d0a', gradient: false, text: '#fafafa', accent: '#f97316', font: 'auto', scale: 100, padding: 80, badge: true, arrow: true, dots: true },
-    brand: { on: true, name: 'Alex Rivera', handle: '@alexfreelances', avatar: null },
-    cta: { on: true, text: 'Follow for more', sub: 'Save this post for the next time you quote a project.' },
+    brand: { on: true, name: L.name, handle: L.handle, avatar: null },
+    cta: { on: true, text: L.cta, sub: L.ctaSub },
     scale2x: false,
     slides: null
   };
@@ -108,7 +117,7 @@
 
   function allSlides() {
     const list = state.slides.slice();
-    if (state.cta.on) list.push({ id: '__cta', cta: true, title: state.cta.text || 'Follow for more', body: state.cta.sub || '', image: null });
+    if (state.cta.on) list.push({ id: '__cta', cta: true, title: state.cta.text || L.cta, body: state.cta.sub || '', image: null });
     return list;
   }
   function currentSlide() { const all = allSlides(); state.current = Math.max(0, Math.min(state.current, all.length - 1)); return all[state.current]; }
@@ -393,7 +402,7 @@
     // CTA pill
     if (slide.cta && env.brand.handle) {
       const y = env.ctaPillY != null ? env.ctaPillY : env.lastY + 44 * env.scale;
-      const r = pill(ctx, env, 'Follow ' + env.brand.handle, env.lastAlign === 'center' ? env.w / 2 : env.lastX, y, env.lastAlign === 'center' ? 'center' : 'left', t.accent, '#ffffff', 30);
+      const r = pill(ctx, env, L.follow + ' ' + env.brand.handle, env.lastAlign === 'center' ? env.w / 2 : env.lastX, y, env.lastAlign === 'center' ? 'center' : 'left', t.accent, '#ffffff', 30);
       void r;
     }
     ctx.restore();
@@ -469,7 +478,7 @@
   function addSlide(after) {
     if (state.slides.length >= MAX_SLIDES) { toast('Maximum ' + MAX_SLIDES + ' slides per carousel'); return; }
     const i = Math.min(after == null ? state.slides.length - 1 : after, state.slides.length - 1);
-    const s = newSlide({ title: 'New slide', body: '' }); state.slides.splice(i + 1, 0, s); state.current = i + 1; syncText(); update(); track('slide_add', {});
+    const s = newSlide({ title: L.newSlide, body: '' }); state.slides.splice(i + 1, 0, s); state.current = i + 1; syncText(); update(); track('slide_add', {});
     const t = $('slideTitle'); t.focus(); t.select();
   }
   function duplicateSlide() {
@@ -494,7 +503,7 @@
     update();
   }, 150));
   $('exampleBtn').addEventListener('click', () => { state.slides = parseText(DEFAULT_TEXT).map(newSlide); state.current = 0; textEl.value = DEFAULT_TEXT; update(); toast('Example loaded'); });
-  $('clearBtn').addEventListener('click', () => { state.slides = [newSlide({ title: 'Your hook goes here', body: '' })]; state.current = 0; textEl.value = ''; update(); textEl.focus(); });
+  $('clearBtn').addEventListener('click', () => { state.slides = [newSlide({ title: L.blank, body: '' })]; state.current = 0; textEl.value = ''; update(); textEl.focus(); });
   $('ctaOn').addEventListener('change', e => { state.cta.on = e.target.checked; $('ctaFields').classList.toggle('hidden', !state.cta.on); update(); });
   $('ctaText').addEventListener('input', e => { state.cta.text = e.target.value; update({ panel: false }); });
   $('ctaSub').addEventListener('input', e => { state.cta.sub = e.target.value; update({ panel: false }); });
